@@ -20,13 +20,13 @@ public class Choice {
     private Question question;
 
     @ManyToMany(mappedBy = "choices", cascade = CascadeType.ALL)
-    private List<Result> results = new ArrayList<>();
+    private List<PollResult> results = new ArrayList<>();
 
-    public List<Result> getResults() {
+    public List<PollResult> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<PollResult> results) {
         this.results = results;
     }
 

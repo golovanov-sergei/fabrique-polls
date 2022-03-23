@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "results")
-public class Result {
+@Table(name = "poll-results")
+public class PollResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
