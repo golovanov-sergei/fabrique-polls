@@ -3,6 +3,7 @@ package studio.fabrique.polls.service.impl;
 import org.springframework.stereotype.Service;
 import studio.fabrique.polls.domain.Poll;
 import studio.fabrique.polls.domain.Question;
+import studio.fabrique.polls.enums.QuestionType;
 import studio.fabrique.polls.repositories.PollRepository;
 import studio.fabrique.polls.repositories.QuestionRepository;
 import studio.fabrique.polls.service.QuestionService;
@@ -27,7 +28,8 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question createQuestion(Question question, Long pollId) {
         Poll poll = pollRepository.findById(pollId).get();
-        poll.getQuestions().add(question);
+        question.setPoll(poll);
+//        question.setQuestionType(QuestionType.MULTIPLE_CHOICE);
         return questionRepository.save(question);
     }
 }
