@@ -8,6 +8,6 @@ public interface PollService {
     List<Poll> getAllPolls();
     List<Poll> getAllActivePolls();
     Poll savePoll(Poll poll);
-    Poll editPoll(Poll poll);
+    Poll editPoll(Long pollId, Poll poll);
     void deletePoll(Long pollId);
 }

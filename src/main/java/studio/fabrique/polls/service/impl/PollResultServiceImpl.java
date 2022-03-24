@@ -1,10 +1,10 @@
 package studio.fabrique.polls.service.impl;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import studio.fabrique.polls.domain.Choice;
 import studio.fabrique.polls.domain.Person;
 import studio.fabrique.polls.domain.PollResult;
+import studio.fabrique.polls.exception.NoSuchEntityException;
 import studio.fabrique.polls.repositories.ChoiceRepository;
 import studio.fabrique.polls.repositories.PersonRepository;
 import studio.fabrique.polls.repositories.PollResultRepository;
@@ -16,6 +16,10 @@ import java.util.Optional;
 
 @Service
 public class PollResultServiceImpl implements PollResultService {
+    private static final String PERSON_NOT_FOUND = "Person with Id=%s not found.";
+    private static final String POLL_RESULT_NOT_FOUND = "PollResult with Id=%s not found.";
+    private static final String CHOICE_NOT_FOUND = "Choice with Id=%s not found.";
+
     private final PollResultRepository pollResultRepository;
     private final PersonRepository personRepository;
     private final ChoiceRepository choiceRepository;
@@ -33,7 +37,7 @@ public class PollResultServiceImpl implements PollResultService {
 
     @Override
     public List<PollResult> getAllPollResultsOfPerson(Long personId) {
-        Person person = personRepository.findById(personId).get();
+        Person person = personRepository.findById(personId).orElseThrow(() -> new NoSuchEntityException(String.format(PERSON_NOT_FOUND, personId)));
         return pollResultRepository.findByPerson(person);
     }
 
@@ -54,9 +58,8 @@ public class PollResultServiceImpl implements PollResultService {
 
     @Override
     public PollResult addChoiceToPoll(Long pollResultId, Long choiceId) {
-        PollResult pollResult = pollResultRepository.findById(pollResultId).get();
-        Choice choice = choiceRepository.findById(choiceId).get();
-//        need validation for choice belongs to question of the poll
+        PollResult pollResult = pollResultRepository.findById(pollResultId).orElseThrow(() -> new NoSuchEntityException(String.format(POLL_RESULT_NOT_FOUND, pollResultId)));
+        Choice choice = choiceRepository.findById(choiceId).orElseThrow(() -> new NoSuchEntityException(String.format(CHOICE_NOT_FOUND, choiceId)));
         pollResult.getChoices().add(choice);
         return pollResultRepository.save(pollResult);
     }

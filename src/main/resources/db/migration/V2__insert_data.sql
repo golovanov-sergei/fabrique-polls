@@ -1,6 +1,3 @@
-INSERT INTO public.person (name) VALUES ('Sergei');
-INSERT INTO public.person (name) VALUES ('Ivan');
-
 INSERT INTO public.polls (name, description, start_date, end_date) VALUES ('Survey #1', 'Survey #1 description', '2022-03-23 16:55:35.874907', '2022-04-02 16:55:35.874907');
 INSERT INTO public.polls (name, description, start_date, end_date) VALUES ('Survey #2', 'Survey #2 description', '2022-03-24 14:00:00.000000', '2022-04-24 14:00:00.000000');
 

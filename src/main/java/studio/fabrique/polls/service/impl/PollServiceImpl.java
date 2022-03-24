@@ -1,8 +1,8 @@
 package studio.fabrique.polls.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import studio.fabrique.polls.domain.Poll;
+import studio.fabrique.polls.exception.NoSuchEntityException;
 import studio.fabrique.polls.repositories.PollRepository;
 import studio.fabrique.polls.service.PollService;
 
@@ -11,6 +11,8 @@ import java.util.List;
 
 @Service
 public class PollServiceImpl implements PollService {
+    private static final String POLL_NOT_FOUND = "Poll with Id=%s not found.";
+
     private final PollRepository pollRepository;
 
     public PollServiceImpl(PollRepository pollRepository) {
@@ -24,8 +26,7 @@ public class PollServiceImpl implements PollService {
 
     @Override
     public List<Poll> getAllActivePolls() {
-//        return null;
-        return pollRepository.findAllByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDateTime.now(),LocalDateTime.now());
+        return pollRepository.findAllByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDateTime.now(), LocalDateTime.now());
     }
 
     @Override
@@ -34,10 +35,12 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public Poll editPoll(Poll poll) {
-        poll.setStartDate(null);
-//        pollRepository.findById(poll.getId());
-        return pollRepository.save(poll);
+    public Poll editPoll(Long pollId, Poll poll) {
+        Poll editedPoll = pollRepository.findById(pollId).orElseThrow(() -> new NoSuchEntityException(String.format(POLL_NOT_FOUND, pollId)));
+        editedPoll.setName(poll.getName());
+        editedPoll.setDescription(poll.getDescription());
+        editedPoll.setEndDate(poll.getEndDate());
+        return pollRepository.save(editedPoll);
     }
 
     @Override

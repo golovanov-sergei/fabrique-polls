@@ -8,4 +8,5 @@ public interface ChoiceService {
     List<Choice> getAllChoices();
     List<Choice> getAllChoices(Long questionId);
     List<Choice> createChoice(List<Choice> choiceList, Long questionId);
+    Choice createTextChoice(Choice choice, Long questionId);
 }

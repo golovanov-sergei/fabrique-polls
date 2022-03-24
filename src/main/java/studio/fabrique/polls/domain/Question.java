@@ -22,7 +22,7 @@ public class Question {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "poll_id")
     @JsonBackReference
     private Poll poll;
