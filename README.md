@@ -1,5 +1,5 @@
 # Тестовое задание
-###Задача: спроектировать и разработать API для системы опросов пользователей.
+### Задача: спроектировать и разработать API для системы опросов пользователей.
 
 ***Функционал для администратора системы:***
 
@@ -40,7 +40,7 @@ API documentation
 > http://localhost:8080/swagger-ui.html
 
 
-##To implement task used following stack
+## To implement task used following stack
 - Spring Boot
 - Spring Data
 - Spring Security
