@@ -52,3 +52,4 @@ API documentation
 - Java 17
 - Apache Maven
 - ~~Docker~~
+- ~~JUnit~~
