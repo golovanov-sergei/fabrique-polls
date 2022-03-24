@@ -31,9 +31,16 @@ public class ChoiceServiceImpl implements ChoiceService {
     }
 
     @Override
-    public Choice createChoice(Choice choice, Long questionId) {
+    public List<Choice> createChoice(List<Choice> choiceList, Long questionId) {
         Question question = questionRepository.findById(questionId).get();
-        choice.setQuestion(question);
-        return choiceRepository.save(choice);
+        choiceList.forEach(c -> {
+            c.setQuestion(question);
+            choiceRepository.save(c);
+        });
+//        List<Choice> savedChoiceList = choiceRepository.saveAll(choiceList);
+//        question.getChoices().clear();
+//        question.getChoices().addAll(savedChoiceList);
+//        question.setChoices(savedChoiceList);
+        return choiceRepository.saveAll(choiceList);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface PollResultService {
     List<PollResult> getAllPollResults();
+    List<PollResult> getAllPollResultsOfPerson(Long personId);
     PollResult createPollResult(Long personId);
-    void addChoice(long pollResultId);
+    PollResult addChoiceToPoll(Long pollResultId, Long choiceId);
 }
