@@ -1,5 +1,7 @@
 package studio.fabrique.polls.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +19,8 @@ public class Choice {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
+    @JsonBackReference
     private Question question;
-
-    @ManyToMany(mappedBy = "choices", cascade = CascadeType.ALL)
-    private List<PollResult> results = new ArrayList<>();
-
-    public List<PollResult> getResults() {
-        return results;
-    }
-
-    public void setResults(List<PollResult> results) {
-        this.results = results;
-    }
 
     public Question getQuestion() {
         return question;

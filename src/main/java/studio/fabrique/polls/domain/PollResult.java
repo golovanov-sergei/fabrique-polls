@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "poll-results")
+@Table(name = "pollresults")
 public class PollResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,10 @@ public class PollResult {
     private LocalDateTime dateTime;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "poll_id")
-    private Poll poll;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "results_choices",
-            joinColumns = @JoinColumn(name = "result_id"),
-            inverseJoinColumns = @JoinColumn(name = "choices_id"))
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Choice> choices = new ArrayList<>();
 
     public List<Choice> getChoices() {
@@ -44,14 +37,6 @@ public class PollResult {
 
     public void setPerson(Person person) {
         this.person = person;
-    }
-
-    public Poll getPoll() {
-        return poll;
-    }
-
-    public void setPoll(Poll poll) {
-        this.poll = poll;
     }
 
     public LocalDateTime getDateTime() {

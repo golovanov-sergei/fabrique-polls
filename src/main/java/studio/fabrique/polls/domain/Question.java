@@ -1,5 +1,6 @@
 package studio.fabrique.polls.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import studio.fabrique.polls.enums.QuestionType;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Question {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "poll_id")
+    @JsonBackReference
     private Poll poll;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
