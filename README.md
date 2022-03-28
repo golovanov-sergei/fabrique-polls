@@ -39,7 +39,7 @@ To run application type
 Authentication endpoint
 > http://localhost:8080/api/user/login \
 > username:admin\
-> password:admin123
+> password:admin
 
 API documentation
 > http://localhost:8080/swagger-ui.html
