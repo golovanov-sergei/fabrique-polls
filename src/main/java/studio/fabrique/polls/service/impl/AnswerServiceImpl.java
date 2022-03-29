@@ -1,5 +1,6 @@
 package studio.fabrique.polls.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import studio.fabrique.polls.domain.Answer;
 import studio.fabrique.polls.repositories.AnswerRepository;
